@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+VITE_API_URL=http://localhost:5001/api
 
 node_modules
 dist
