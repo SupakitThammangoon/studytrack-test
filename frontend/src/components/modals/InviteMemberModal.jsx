@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { boardAPI } from '../../services/api';
+import { invitationAPI } from '../../services/api';
 
 export default function InviteMemberModal({ open, onClose, boardId, onInvited }) {
   const [username, setUsername] = useState('');
@@ -14,7 +14,8 @@ export default function InviteMemberModal({ open, onClose, boardId, onInvited })
     }
     setLoading(true);
     try {
-      await boardAPI.addMember(boardId, username);
+      await invitationAPI.send(boardId, username);
+      alert('ส่งคำเชิญเรียบร้อย รอผู้รับตอบรับ');
       setUsername('');
       onInvited?.();
       onClose();
@@ -34,7 +35,9 @@ export default function InviteMemberModal({ open, onClose, boardId, onInvited })
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-lg font-bold mb-2">เชิญเพื่อนร่วมทีม</h2>
-        <p className="text-sm text-gray-500 mb-5">ใส่ชื่อผู้ใช้ของเพื่อนเพื่อเพิ่มเข้าบอร์ด</p>
+        <p className="text-sm text-gray-500 mb-5">
+          ใส่ชื่อผู้ใช้ของเพื่อน คำเชิญจะถูกส่งไปให้พวกเขาตอบรับ
+        </p>
         <input
           type="text"
           value={username}
@@ -56,7 +59,7 @@ export default function InviteMemberModal({ open, onClose, boardId, onInvited })
             disabled={loading}
             className="px-5 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
           >
-            {loading ? 'กำลังเชิญ...' : 'เชิญเข้าทีม'}
+            {loading ? 'กำลังส่ง...' : 'ส่งคำเชิญ'}
           </button>
         </div>
       </div>

@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/boards', require('./routes/boardRoutes'));
 app.use('/api/tasks', require('./routes/taskRoutes'));
+app.use('/api/invitations', require('./routes/invitationRoutes'));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
